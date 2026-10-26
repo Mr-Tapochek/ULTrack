@@ -1,0 +1,322 @@
+:root {
+    --bg: #f5f7fb;
+    --card: #ffffff;
+    --text: #1a1d24;
+    --muted: #6b7280;
+    --border: #e2e6ee;
+    --accent: #2563eb;
+    --accent-hover: #1d4ed8;
+    --danger: #dc2626;
+    --radius: 12px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+}
+
+/* Контейнер */
+.container {
+    max-width: 420px;
+    margin: 60px auto;
+    padding: 0 16px;
+}
+
+.card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 32px;
+    box-shadow: 0 1px 3px rgba(16, 24, 40, 0.06);
+}
+
+/* Логотип / заголовок сайта */
+.brand {
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.brand-name {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: -0.5px;
+}
+
+.brand-sub {
+    font-size: 13px;
+    color: var(--muted);
+    margin-top: 4px;
+}
+
+h1 {
+    font-size: 20px;
+    font-weight: 600;
+    margin: 0 0 20px;
+}
+
+h2 {
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0 0 16px;
+}
+
+/* Поля формы */
+form p {
+    margin: 0 0 16px;
+}
+
+label {
+    display: block;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--muted);
+    margin-bottom: 6px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+select {
+    width: 100%;
+    padding: 10px 12px;
+    font-size: 15px;
+    color: var(--text);
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    outline: none;
+    transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+input:focus,
+select:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+/* Радиокнопки роли */
+ul#id_role,
+ul.errorlist {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 16px;
+}
+
+ul#id_role li {
+    display: inline-block;
+    margin-right: 16px;
+}
+
+ul#id_role label {
+    display: inline;
+    font-size: 15px;
+    color: var(--text);
+    margin: 0;
+}
+
+/* Кнопка */
+button[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #fff;
+    background: var(--accent);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.15s;
+}
+
+button[type="submit"]:hover {
+    background: var(--accent-hover);
+}
+
+/* Ссылки */
+a {
+    color: var(--accent);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.form-footer {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 14px;
+    color: var(--muted);
+}
+
+/* Ошибки */
+.error,
+.errorlist {
+    color: var(--danger);
+    font-size: 13px;
+    margin: 6px 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+/* Сообщение "Привет, user" */
+.greeting {
+    font-size: 16px;
+    margin: 0 0 8px;
+}
+
+.greeting strong {
+    color: var(--accent);
+}
+
+.role-badge {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 2px 10px;
+    border-radius: 999px;
+    background: #eef2ff;
+    color: var(--accent);
+    margin-left: 6px;
+    vertical-align: middle;
+}
+
+.muted {
+    color: var(--muted);
+    font-size: 14px;
+}
+
+/* Логаут-кнопка как ссылка */
+.logout-link {
+    display: inline-block;
+    margin-top: 12px;
+    font-size: 14px;
+    color: var(--muted);
+}
+
+.logout-link:hover {
+    color: var(--danger);
+}
+
+/* Главная — чуть шире */
+.container.wide {
+    max-width: 640px;
+}
+
+.hero {
+    text-align: center;
+    margin-bottom: 28px;
+}
+
+.hero h1 {
+    font-size: 28px;
+    margin-bottom: 8px;
+}
+
+.hero p {
+    color: var(--muted);
+    margin: 0;
+}
+
+.auth-form p {
+    margin: 0 0 18px;
+}
+
+/* Подпись поля */
+.auth-form p > label {
+    display: block;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--muted);
+    margin-bottom: 6px;
+}
+
+/* Все инпуты внутри формы */
+.auth-form p > input[type="text"],
+.auth-form p > input[type="email"],
+.auth-form p > input[type="password"] {
+    width: 100%;
+    padding: 11px 13px;
+    font-size: 15px;
+    color: var(--text);
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    outline: none;
+    transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.auth-form p > input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+/* Скрываем стандартные подсказки Django (help_text), если не нужны */
+.auth-form .helptext {
+    display: none;
+}
+
+/* Ошибки полей */
+.auth-form .errorlist {
+    list-style: none;
+    margin: 6px 0 0;
+    padding: 0;
+    color: var(--danger);
+    font-size: 13px;
+}
+
+/* Радиокнопки роли (Django рисует <ul id="id_role">) */
+.auth-form ul#id_role {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 20px;
+}
+
+.auth-form ul#id_role li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.auth-form ul#id_role label {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 400;
+    color: var(--text);
+    cursor: pointer;
+}
+
+.auth-form ul#id_role input[type="radio"] {
+    width: 16px;
+    height: 16px;
+    accent-color: var(--accent);
+    cursor: pointer;
+}
+
+/* Кнопка */
+.auth-form button[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    margin-top: 4px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #fff;
+    background: var(--accent);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.15s;
+}
+
+.auth-form button[type="submit"]:hover {
+    background: var(--accent-hover);
+}

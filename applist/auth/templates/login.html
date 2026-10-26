@@ -1,12 +1,32 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Вход</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>Вход — УлТрек</title>
 </head>
 <body>
-    <h1>Это страница входа!</h1>
-    <a href="{% url "register" %}">Зарегистрироваться</a>
+    <div class="container">
+        <div class="card">
+            <div class="brand">
+                <div class="brand-name">УлТрек</div>
+                <div class="brand-sub">Поездки по городу</div>
+            </div>
+
+            <h1>Вход</h1>
+
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Войти</button>
+            </form>
+
+            <div class="form-footer">
+                Нет аккаунта? <a href="{% url "register" %}">Зарегистрироваться</a>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
