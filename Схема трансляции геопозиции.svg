@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="3200" height="1800" viewBox="0 0 3200 1800" role="img" aria-labelledby="title desc">
+  <title id="title">Как геопозиция маршрутки попадает на карту пассажира</title>
+  <desc id="desc">Большая векторная схема от телефона водителя через браузер, HTTPS и API сервера к базе данных, затем к браузеру пассажира и карте. Показаны разрешение геолокации, проверки, устаревшая точка и рекомендуемый режим MVP.</desc>
+  <defs>
+    <marker id="arrowBlue" markerWidth="14" markerHeight="14" refX="11" refY="7" orient="auto"><path d="M1 1 L12 7 L1 13 Z" fill="#1769aa"/></marker>
+    <marker id="arrowGreen" markerWidth="14" markerHeight="14" refX="11" refY="7" orient="auto"><path d="M1 1 L12 7 L1 13 Z" fill="#17824b"/></marker>
+    <marker id="arrowPurple" markerWidth="14" markerHeight="14" refX="11" refY="7" orient="auto"><path d="M1 1 L12 7 L1 13 Z" fill="#7652a5"/></marker>
+    <marker id="arrowGray" markerWidth="14" markerHeight="14" refX="11" refY="7" orient="auto"><path d="M1 1 L12 7 L1 13 Z" fill="#687386"/></marker>
+    <style>
+      .bg{fill:#f4f7fb}.title{font:700 54px Arial,sans-serif;fill:#172b4d}.subtitle{font:28px Arial,sans-serif;fill:#43536a}
+      .head{font:700 31px Arial,sans-serif;fill:#172b4d}.body{font:25px Arial,sans-serif;fill:#24364b}.small{font:22px Arial,sans-serif;fill:#43536a}
+      .tiny{font:20px Arial,sans-serif;fill:#43536a}.box{stroke-width:3;rx:24}.blue{fill:#e9f3ff;stroke:#3680bd}.green{fill:#e8f7ee;stroke:#3c9a66}.purple{fill:#f2edfa;stroke:#8060b0}.gold{fill:#fff5dc;stroke:#c49324}.gray{fill:#f0f2f5;stroke:#8993a2}
+      .arrow{fill:none;stroke-width:7;stroke-linecap:round;stroke-linejoin:round}.dashed{stroke-dasharray:16 14}.pill{rx:18;fill:#fff;stroke:#cad4e0;stroke-width:2}
+    </style>
+  </defs>
+  <rect class="bg" width="3200" height="1800"/>
+  <text class="title" x="100" y="100">Как геопозиция маршрутки попадает на карту пассажира</text>
+  <text class="subtitle" x="104" y="150">Предлагаемый MVP: браузер водителя → HTTPS/JSON → Python API → актуальная точка → браузер пассажира</text>
+
+  <!-- Main lane -->
+  <rect class="box blue" x="90" y="235" width="530" height="560"/>
+  <text class="head" x="130" y="295">1. Телефон водителя</text>
+  <text class="body" x="130" y="350">Водитель сам включает передачу</text>
+  <rect class="pill" x="130" y="385" width="440" height="88"/>
+  <text class="body" x="155" y="423">Нажать «Начать»</text><text class="small" x="155" y="454">и разрешить геолокацию</text>
+  <rect class="pill" x="130" y="495" width="440" height="105"/>
+  <text class="body" x="155" y="535">Устройство определяет</text><text class="small" x="155" y="570">широту, долготу, точность, время</text>
+  <rect class="pill" x="130" y="622" width="440" height="115"/>
+  <text class="body" x="155" y="664">Сайт показывает состояние</text><text class="small" x="155" y="699">передаётся / ошибка / остановлено</text>
+  <text class="tiny" x="130" y="770">GPS может быть неточным или временно недоступным</text>
+
+  <rect class="box blue" x="700" y="235" width="540" height="560"/>
+  <text class="head" x="740" y="295">2. Браузер водителя</text>
+  <text class="body" x="740" y="350">JavaScript на странице</text>
+  <rect class="pill" x="740" y="385" width="460" height="105"/>
+  <text class="body" x="765" y="427">Получает координаты</text><text class="small" x="765" y="463">через API геолокации браузера</text>
+  <rect class="pill" x="740" y="515" width="460" height="120"/>
+  <text class="body" x="765" y="557">Отправляет JSON по HTTPS</text><text class="small" x="765" y="594">с активной сессией водителя</text>
+  <rect class="pill" x="740" y="660" width="460" height="88"/>
+  <text class="small" x="765" y="699">Требуется HTTPS (кроме localhost)</text>
+
+  <rect class="box green" x="1330" y="235" width="620" height="560"/>
+  <text class="head" x="1370" y="295">3. Сервер проекта (Python API)</text>
+  <text class="body" x="1370" y="350">Принимает, проверяет и выдаёт данные</text>
+  <rect class="pill" x="1370" y="385" width="540" height="105"/>
+  <text class="body" x="1395" y="427">Проверяет пользователя и роль</text><text class="small" x="1395" y="463">имеет ли право начать эту поездку?</text>
+  <rect class="pill" x="1370" y="515" width="540" height="105"/>
+  <text class="body" x="1395" y="557">Проверяет координату и частоту</text><text class="small" x="1395" y="593">формат, диапазон, время, точность</text>
+  <rect class="pill" x="1370" y="645" width="540" height="105"/>
+  <text class="body" x="1395" y="687">Берёт маршрут из назначения</text><text class="small" x="1395" y="723">не доверяет номеру от браузера</text>
+
+  <rect class="box gold" x="2050" y="235" width="450" height="560"/>
+  <text class="head" x="2090" y="295">4. База данных</text>
+  <text class="body" x="2090" y="350">PostgreSQL</text>
+  <rect class="pill" x="2090" y="390" width="370" height="110"/>
+  <text class="body" x="2115" y="433">Сохраняет</text><text class="small" x="2115" y="469">последнюю точку и время</text>
+  <rect class="pill" x="2090" y="530" width="370" height="130"/>
+  <text class="body" x="2115" y="573">Знает маршруты</text><text class="small" x="2115" y="610">и разрешённые назначения</text>
+  <text class="small" x="2090" y="710">Историю пути не хранить</text><text class="small" x="2090" y="742">без отдельной необходимости</text>
+
+  <rect class="box purple" x="2600" y="235" width="510" height="560"/>
+  <text class="head" x="2640" y="295">5. Пассажирский сайт</text>
+  <text class="body" x="2640" y="350">Получает только активные точки</text>
+  <rect class="pill" x="2640" y="390" width="430" height="118"/>
+  <text class="body" x="2665" y="433">MVP: HTTP-опрос</text><text class="small" x="2665" y="472">например, каждые 3–5 секунд</text>
+  <rect class="pill" x="2640" y="535" width="430" height="118"/>
+  <text class="body" x="2665" y="578">Позже: WebSocket</text><text class="small" x="2665" y="617">если понадобится push-обновление</text>
+  <rect class="pill" x="2640" y="680" width="430" height="70"/>
+  <text class="small" x="2665" y="724">Показывает номер и свежесть</text>
+
+  <!-- arrows main -->
+  <path class="arrow" stroke="#1769aa" marker-end="url(#arrowBlue)" d="M620 505 H690"/>
+  <text class="small" x="620" y="480">координата</text>
+  <path class="arrow" stroke="#1769aa" marker-end="url(#arrowBlue)" d="M1240 545 H1320"/>
+  <text class="small" x="1245" y="515">HTTPS + JSON</text>
+  <path class="arrow" stroke="#17824b" marker-end="url(#arrowGreen)" d="M1950 535 H2040"/>
+  <text class="small" x="1955" y="505">сохранить</text>
+  <text class="small" x="2100" y="505">чтение / запись</text>
+
+  <!-- map rendering and stale status -->
+  <rect class="box purple" x="850" y="920" width="700" height="400"/>
+  <text class="head" x="900" y="985">6. Карта в браузере пассажира</text>
+  <text class="body" x="900" y="1045">Основа карты + слой маркеров</text>
+  <rect class="pill" x="900" y="1080" width="600" height="95"/>
+  <text class="body" x="925" y="1120">Координата → положение маркера</text><text class="small" x="925" y="1152">подпись: номер маршрута</text>
+  <rect class="pill" x="900" y="1190" width="600" height="85"/>
+  <text class="small" x="925" y="1241">Карта рисует, сервер проекта передаёт GPS-данные</text>
+  <path class="arrow" stroke="#17824b" marker-end="url(#arrowGreen)" d="M1640 795 V865 H2840 V805"/>
+  <text class="small" x="1900" y="850">API отдаёт пассажирскому сайту свежие точки</text>
+  <path class="arrow" stroke="#7652a5" marker-end="url(#arrowPurple)" d="M2850 795 V910 H1500"/>
+  <text class="small" x="2010" y="900">браузер обновляет маркеры</text>
+
+  <rect class="box gray" x="1690" y="920" width="700" height="400"/>
+  <text class="head" x="1740" y="985">7. Устаревшая точка / сбой</text>
+  <text class="body" x="1740" y="1045">Если нет новых координат:</text>
+  <text class="body" x="1770" y="1100">• показать «данные устарели»;</text>
+  <text class="body" x="1770" y="1150">• затем скрыть/приглушить метку;</text>
+  <text class="body" x="1770" y="1200">• не выдавать старое положение за текущее.</text>
+  <text class="small" x="1740" y="1270">Порог, например 20–30 секунд, проверить в тесте</text>
+
+  <path class="arrow dashed" stroke="#687386" marker-end="url(#arrowGray)" d="M1550 1120 H1680"/>
+  <text class="small" x="1560" y="1087">нет свежей точки</text>
+
+  <!-- Bottom legend and critical note -->
+  <rect class="box gold" x="90" y="1410" width="3010" height="290"/>
+  <text class="head" x="140" y="1470">Что важно помнить</text>
+  <text class="body" x="140" y="1525">• Браузер получает местоположение только после разрешения водителя; передача должна быть видимой и отключаемой.</text>
+  <text class="body" x="140" y="1575">• В обычном мобильном браузере фоновая передача не гарантируется: заблокированный экран/вкладка могут остановить обновления.</text>
+  <text class="body" x="140" y="1625">• Координаты приблизительны. Показывайте время обновления; пассажиру нельзя обещать точное прибытие.</text>
+  <text class="body" x="140" y="1675">• Языки не связываются напрямую: JavaScript и Python обмениваются сообщениями по согласованному API через HTTPS/JSON.</text>
+</svg>
