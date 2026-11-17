@@ -16,11 +16,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from auth.views import demo_vehicle_locations, map_page
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', map_page, name='map'),
-    path('api/demo/vehicles/', demo_vehicle_locations, name='demo_vehicle_locations'),
+    path('', include('main.urls')),
     path('auth/', include('auth.urls')),
 ]

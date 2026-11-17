@@ -13,7 +13,7 @@
         integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
         crossorigin=""
     >
-    <link rel="stylesheet" href="{% static 'auth/map.css' %}">
+    <link rel="stylesheet" href="{% static 'css/map.css' %}">
 </head>
 <body>
     <main class="page-shell">
@@ -25,7 +25,17 @@
                     Основа карты — Ульяновск. Значки ниже — вымышленные демонстрационные точки.
                 </p>
             </div>
-            <a class="login-link" href="{% url 'login' %}">Войти</a>
+            {% if user.is_authenticated %}
+                <p class="greeting">
+                    Привет, <strong>{{ user.username }}</strong>
+                    <span class="role-badge">{{ user.profile.role }}</span>
+                </p>
+                <a href="{% url 'logout' %}" class="logout-link">Выйти</a>
+            {% else %}
+                <p class="muted">Вы не вошли.</p>
+                <a href="{% url 'login' %}">Войти</a>
+            {% endif %}
+
         </header>
 
         <section class="demo-notice" aria-label="Предупреждение о демонстрационных данных">
@@ -85,6 +95,6 @@
         crossorigin=""
         defer
     ></script>
-    <script src="{% static 'auth/map.js' %}" defer></script>
+    <script src="{% static 'js/map.js' %}" defer></script>
 </body>
 </html>

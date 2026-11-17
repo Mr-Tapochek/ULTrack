@@ -1,3 +1,4 @@
+/* Styles for the main map page. */
 :root {
     color-scheme: light;
     font-family: Inter, "Segoe UI", Arial, sans-serif;
@@ -272,6 +273,11 @@ h2 {
 
 .bus-marker-badge--stale {
     background: #687386;
+    display: none;
+}
+
+.leaflet-attribution-flag {
+    opacity: 0;
 }
 
 @media (max-width: 760px) {
@@ -322,3 +328,4 @@ h2 {
         padding: 12px;
     }
 }
+

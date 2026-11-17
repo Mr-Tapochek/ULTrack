@@ -115,8 +115,8 @@ git switch -c feature/map-demo
 ```powershell
 git status
 git diff
-git add applist/auth/views.py applist/app/urls.py
-git add applist/auth/templates/map.html applist/auth/static/auth/map.css applist/auth/static/auth/map.js
+git add applist/main/views.py applist/main/urls.py applist/app/urls.py
+git add applist/main/templates/main/map.html applist/main/static/main/map.css applist/main/static/main/map.js
 git diff --cached
 ```
 
@@ -179,8 +179,8 @@ git clone <адрес-репозитория> "C:\Учёба\Новый-клон
 ```text
 Chrome / Edge
   ├─ GET /                  → Django возвращает HTML страницу
-  ├─ GET /static/auth/map.css → Django staticfiles возвращает CSS
-  ├─ GET /static/auth/map.js  → Django staticfiles возвращает JavaScript
+  ├─ GET /static/main/map.css → Django staticfiles возвращает CSS
+  ├─ GET /static/main/map.js  → Django staticfiles возвращает JavaScript
   ├─ GET /api/demo/vehicles/  → Django возвращает JSON с точками
   └─ GET https://tile.openstreetmap.org/... → тайловый сервер возвращает кусочки карты
 ```
@@ -338,31 +338,35 @@ Leaflet не владеет картами и сам по себе не прин
 ```text
 браузер открывает GET /
       ↓
-applist/app/urls.py находит path("", map_page)
+applist/app/urls.py подключает main.urls для сайта и auth.urls для авторизации
       ↓
-applist/auth/views.py вызывает render(request, "map.html")
+applist/main/urls.py находит path("", map_page)
       ↓
-auth/templates/map.html создаёт страницу и <div id="map">
+applist/main/views.py вызывает render(request, "main/map.html")
       ↓
-браузер загружает Leaflet, auth/map.css и auth/map.js
+main/templates/main/map.html создаёт страницу и <div id="map">
+      ↓
+браузер загружает Leaflet, main/map.css и main/map.js
       ↓
 map.js делает GET по URL из data-api-url
       ↓
 app/urls.py находит /api/demo/vehicles/
       ↓
-auth/views.py → JsonResponse([...demo coordinates...])
+main/views.py → JsonResponse([...demo coordinates...])
       ↓
 map.js разбирает JSON и передвигает/создаёт Leaflet-маркеры
 ```
 
 Назначение файлов:
 
-- `applist/app/urls.py` — глобальная таблица адресов сайта.
-- `applist/auth/views.py` — Python-функции, которые обрабатывают запрос и возвращают HTML или JSON.
-- `applist/auth/templates/map.html` — скелет HTML: заголовок, статус, область карты, подключение CSS/JS.
-- `applist/auth/static/auth/map.css` — размер/цвет карты, панели и маркерных плашек.
-- `applist/auth/static/auth/map.js` — Leaflet, `fetch()`, обработка JSON, обновление меток.
-- `applist/auth/tests.py` — проверки, что HTML и GET-API работают, а POST на демонстрационный endpoint отклоняется.
+- `applist/app/urls.py` — подключает URL-таблицы основных приложений.
+- `applist/main/urls.py` — адреса главной страницы карты и демонстрационного API.
+- `applist/main/views.py` — обработчики карты и JSON-ответа с учебными точками.
+- `applist/main/templates/main/map.html` — HTML карты: заголовок, статус, область карты, подключение CSS/JS.
+- `applist/main/static/main/map.css` — размер/цвет карты, панели и маркерных плашек.
+- `applist/main/static/main/map.js` — Leaflet, `fetch()`, обработка JSON, обновление меток.
+- `applist/main/tests.py` — проверки, что HTML и GET-API работают, а POST на демонстрационный endpoint отклоняется.
+- `applist/auth/urls.py` и `applist/auth/views.py` — только адреса и обработчики входа/регистрации.
 
 `{% load static %}`, `{% static ... %}` и `{% url ... %}` — Django template tags. Их обрабатывает Django **до** отправки страницы. Например, `{% url 'demo_vehicle_locations' %}` превращается в корректный путь. Не открывай `map.html` двойным щелчком как обычный файл: без Django эти шаблонные команды не обработаются. Открой сайт через `runserver`.
 

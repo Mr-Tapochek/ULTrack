@@ -1,3 +1,4 @@
+// Behavior for the main map page.
 (() => {
     "use strict";
 
@@ -26,6 +27,8 @@
     const map = L.map(mapElement, {
         scrollWheelZoom: false,
     }).setView(ulyanovskCenter, 13);
+    // Убираем подпись из правого нижнего угла, сохраняя обязательную атрибуцию OSM.
+    map.attributionControl.setPosition("bottomleft");
 
     // В прототипе используем стандартный OSM tile endpoint.
     // Для production нужно выбрать источник тайлов с подходящими условиями и SLA.
